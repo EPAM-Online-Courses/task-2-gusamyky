@@ -47,45 +47,30 @@ public class GuessNumberGame {
 
     public String getLeftAttempts() {
 
-        String attemptsStr = "[" + "*".repeat(currentAttempt + 1) + ".".repeat(leftAttempts - 1) + "]";
-        return attemptsStr;
-    }
-
-    private int getPlayerGuess() {
-        while (true) {
-            System.out.println(UsefulConstants.GIVE_ME);
-            Scanner scanner = new Scanner(System.in);
-            try {
-                return Integer.parseInt(scanner.next());
-            } catch (NumberFormatException e) {
-                System.out.println(UsefulConstants.NOT_A_NUMBER);
-            }
-        }
+        return "[" + "*".repeat(currentAttempt + 1) + ".".repeat(leftAttempts - 1) + "]";
     }
 
     public boolean readAndCheckNum() {
-        System.out.println(UsefulConstants.GIVE_ME);
         Scanner scanner = new Scanner(System.in);
+
         try {
+            System.out.println(UsefulConstants.GIVE_ME+" liczbe");
             attemptNum = Integer.parseInt(scanner.next());
+
+            if (attemptNum > numToGuess) {
+                System.out.println("To " + UsefulConstants.TO_MUCH);
+                return false;
+            } else if (attemptNum < numToGuess) {
+                System.out.println("To " + UsefulConstants.TO_LESS);
+                return false;
+            } else {
+
+                return true;
+            }
         } catch (NumberFormatException e) {
             System.out.println(UsefulConstants.NOT_A_NUMBER);
             return false;
         }
-
-        if (attemptNum > numToGuess) {
-            System.out.println("To " + UsefulConstants.TO_MUCH);
-            return false;
-        } else if (attemptNum < numToGuess) {
-            System.out.println("To " + UsefulConstants.TO_LESS);
-            return false;
-        } else {
-            var secondPart = (currentAttempt + 1) + "- tyle prob zajelo Ci odgadniecie liczby " + numToGuess;
-            System.out.println(UsefulConstants.YES);
-            System.out.println(UsefulConstants.CONGRATULATIONS + ", " + secondPart);
-            return true;
-        }
-
 
     }
 
@@ -98,10 +83,13 @@ public class GuessNumberGame {
     public void play() {
         countAttempts();
         generateNumToGuess();
-        System.out.printf("Zagrajmy. Zgadnij liczbe z zakresu <1, %d>\n", upperBound);
+        System.out.println("Zagrajmy. Zgadnij liczbe z zakresu<1,"+upperBound+">");
         while (leftAttempts > 0) {
-            System.out.println("Twoje próby: " + getLeftAttempts());
+            System.out.println("Twoje proby: " + getLeftAttempts());
             if (readAndCheckNum()) {
+                var secondPart = (currentAttempt + 1) + "- tyle prob zajelo Ci odgadniecie liczby " + numToGuess;
+                System.out.println(UsefulConstants.YES);
+                System.out.println(UsefulConstants.CONGRATULATIONS + ", " + secondPart);
                 break;
             } else {
                 leftAttempts--;
@@ -109,7 +97,7 @@ public class GuessNumberGame {
             }
         }
         if (leftAttempts == 0) {
-            var secondPart = ", wyczerpałeś limit prób (" + currentAttempt + ") do odgadnięcia liczby " + numToGuess;
+            var secondPart = ", wyczerpales limit prob (" + currentAttempt + ") do odgadniecia liczby " + numToGuess;
             System.out.println(UsefulConstants.UNFORTUNATELY + secondPart);
         }
 
