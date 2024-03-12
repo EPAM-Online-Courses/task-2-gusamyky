@@ -56,20 +56,20 @@ public class GuessNumberGame {
         try {
             System.out.println(UsefulConstants.GIVE_ME+" liczbe");
             attemptNum = Integer.parseInt(scanner.next());
-
-            if (attemptNum > numToGuess) {
-                System.out.println("To " + UsefulConstants.TO_MUCH);
-                return false;
-            } else if (attemptNum < numToGuess) {
-                System.out.println("To " + UsefulConstants.TO_LESS);
-                return false;
-            } else {
-
-                return true;
-            }
         } catch (NumberFormatException e) {
             System.out.println(UsefulConstants.NOT_A_NUMBER);
             return false;
+        }
+
+        if (attemptNum > numToGuess) {
+            System.out.println("To " + UsefulConstants.TO_MUCH);
+            return false;
+        } else if (attemptNum < numToGuess) {
+            System.out.println("To " + UsefulConstants.TO_LESS);
+            return false;
+        } else {
+
+            return true;
         }
 
     }
