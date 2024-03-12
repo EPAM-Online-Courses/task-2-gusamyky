@@ -28,12 +28,10 @@ public class GuessNumberGame {
             if (upperBound < 1 || upperBound > UsefulConstants.MAX_UPPER_BOUND) {
                 System.out.println(UsefulConstants.WRONG_ARGUMENT);
                 throw new IllegalArgumentException();
-//                throw new IllegalArgumentException(UsefulConstants.WRONG_ARGUMENT);
             }
         } catch (NumberFormatException e) {
             System.out.println(UsefulConstants.WRONG_ARGUMENT);
             throw new IllegalArgumentException();
-//            throw new IllegalArgumentException(UsefulConstants.WRONG_ARGUMENT);
         }
     }
 
